@@ -2,11 +2,11 @@ import React from "react";
 import { useState } from "react";
 import logoPapelera from "../papelera-de-reciclaje.svg";
 import logoJose from "../jose-ordaz.jpg";
+import AccionesTareas from "./AccionesTareas";
 
-export const ListaTareas = ({onDelete}) => {
+export const ListaTareas = ({ onDelete }) => {
   const [title, setTitle] = useState([]);
   const [tareas, setTareas] = useState([]);
-  const [isEdit, setIsEdit] = useState(false);
 
   function handleChange(event) {
     const value = event.target.value;
@@ -29,20 +29,20 @@ export const ListaTareas = ({onDelete}) => {
     temp.unshift(newTareas);
 
     setTareas(temp);
+    setTitle("")
   }
-
-  function FormEdit() {
-    return (
-      <a href="#" className="text-indigo-600 hover:text-indigo-900">
-        <button onClick={() => setIsEdit(item.id)}>Actualizar</button>
-      </a>
-    );
-  }
-
   function handleDelete(id){
-    const temp = tareas.filter((item) => item.id !== id);
-    setTareas(temp);
-  }
+    const temp = tareas.filter(item => item.id !== id);
+    setTareas(temp)
+ }
+
+ function handleUpdateTarea(id, value){
+  const temp = [...tareas]
+  const item = temp.find(item => item.id === id);
+  item.title = value;
+  setTareas(temp)
+ }
+ 
 
   return (
     <div className="container mx-auto max-w-3xl px-4 sm:px-8">
@@ -58,7 +58,7 @@ export const ListaTareas = ({onDelete}) => {
                   type="text"
                   id='"form-subscribe-Filter'
                   className=" w-full flex-1 appearance-none rounded-lg border border-transparent border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600"
-                  placeholder="Escriba tu tarea..."
+                  placeholder="Escribe tu tarea..."
                   value={title}
                   onChange={handleChange}
                 />
@@ -132,71 +132,8 @@ export const ListaTareas = ({onDelete}) => {
                   </tr>
                 </thead>
                 {tareas.map((item) => (
-                  <tbody key={item.id}>
-                    <tr>
-                      <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-                        <div className="flex items-center">
-                          <div className="flex-shrink-0">
-                            <a href="#" className="relative block">
-                              <img
-                                alt="profil"
-                                src={logoJose}
-                                className="mx-auto h-10 w-10 rounded-full object-cover "
-                              />
-                            </a>
-                          </div>
-                          <div className="ml-3">
-                            <p className="whitespace-no-wrap text-gray-900">
-                              Jose Ordaz
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-                        <p className="whitespace-no-wrap uppercase text-gray-900">
-                          <strong key={item.id}>{item.title}</strong>
-                        </p>
-                      </td>
-                      <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-                        <p
-                          key={item.id}
-                          className="whitespace-no-wrap text-gray-900"
-                        >
-                          {item.date}
-                        </p>
-                      </td>
-                      <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-                        <span className="relative inline-block px-3 py-1 font-semibold leading-tight text-green-900">
-                          <span className="absolute inset-0 rounded-full bg-green-200 opacity-50"></span>
-                          <span className="relative">active</span>
-                        </span>
-                      </td>
-                      <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-                        <a
-                          href="#"
-                          className="text-indigo-600 hover:text-indigo-900"
-                        >
-                          <button onClick={() => setIsEdit(item.id)}>
-                            Editar
-                          </button>
-                        </a>
-                      </td>
-                      <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-                        <a
-                          href="#"
-                          className="text-red-600 hover:text-indigo-900"
-                        >
-                          <button onClick={() => handleDelete(item.id)}>
-                            <img
-                              src={logoPapelera}
-                              className="animate-wave  w-5"
-                              alt="papelera"
-                            />
-                          </button>
-                        </a>
-                      </td>
-                    </tr>
-                  </tbody>
+              <AccionesTareas key={item.id} item={item}  value={title}
+                   onDelete={handleDelete} onUpdate={handleUpdateTarea}></AccionesTareas>
                 ))}
               </>
             </table>
