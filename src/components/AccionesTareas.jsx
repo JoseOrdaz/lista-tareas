@@ -3,14 +3,15 @@ import { useState } from "react";
 import logoPapelera from "../papelera-de-reciclaje.svg";
 import logoJose from "../jose-ordaz.jpg";
 
+
 export const AccionesTareas = ({item, onDelete, onUpdate}) => {
 
-    const [isEdit, setIsEdit] = useState(false);
+const [isEdit, setIsEdit] = useState(false);
 
 
-    function FormEdit() {
+ function FormEdit() {
         const [newValue, setNewValue] = useState(item.title);
-
+      
         function handleSubmit(e) {
             e.preventDefault();
            
@@ -20,6 +21,9 @@ export const AccionesTareas = ({item, onDelete, onUpdate}) => {
             const value = e.target.value;
             setNewValue(value)
           }
+
+          
+
           function handleClickUpdateTarea(){
             onUpdate(item.id, newValue)
             setIsEdit(false)
@@ -55,6 +59,7 @@ export const AccionesTareas = ({item, onDelete, onUpdate}) => {
                   value={newValue}
                   onChange={handleChange}
                   onSubmit={handleSubmit}
+                  
                 />
 
         
@@ -93,29 +98,19 @@ export const AccionesTareas = ({item, onDelete, onUpdate}) => {
             </tr>
           </tbody>
         );
-      }
+    }
 
-      function TareasElement(){
+function TareasElement(){
+
         return (
             <tbody>
             <tr>
               <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-                <div className="flex items-center">
-                  <div className="flex-shrink-0">
-                    <a href="#" className="relative block">
-                      <img
-                        alt="profil"
-                        src={logoJose}
-                        className="mx-auto h-10 w-10 rounded-full object-cover "
-                      />
-                    </a>
-                  </div>
-                  <div className="ml-3">
-                    <p className="whitespace-no-wrap text-gray-900">
-                      Jose Ordaz
-                    </p>
-                  </div>
-                </div>
+
+             <span className="flex items-center">
+                  <img src={item.person.avatar} alt="" className="h-6 w-6 flex-shrink-0 rounded-full" />
+                  <span className="ml-3 block truncate text-black">{item.person.name}</span>
+                </span>
               </td>
               <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
                 <p className="whitespace-no-wrap uppercase text-gray-900">
@@ -168,6 +163,7 @@ export const AccionesTareas = ({item, onDelete, onUpdate}) => {
    
   return (
     <>
+    
     {isEdit ? <FormEdit/> : <TareasElement/>}
     </>
   )

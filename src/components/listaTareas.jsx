@@ -1,20 +1,122 @@
 import React from "react";
-import { useState } from "react";
-import logoPapelera from "../papelera-de-reciclaje.svg";
-import logoJose from "../jose-ordaz.jpg";
 import AccionesTareas from "./AccionesTareas";
+import { Fragment, useState } from 'react'
+import { Listbox, Transition } from '@headlessui/react'
+import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
+import { useForm } from "react-hook-form";
 
-export const ListaTareas = ({ onDelete }) => {
+
+
+const people = [
+  {
+    id: 1,
+    name: 'Jose Ordaz',
+    avatar:
+      '/src/jose-ordaz.jpg',
+  },
+  {
+    id: 2,
+    name: 'Elena Martínez',
+    avatar:
+      '/src/elena.jpg',
+  }
+ 
+]
+
+
+
+export const ListaTareas = () => {
   const [title, setTitle] = useState([]);
   const [tareas, setTareas] = useState([]);
+  const [selected, setSelected] = useState(people[0])
+  const [validated, setValidated] = useState(false)
 
-  function handleChange(event) {
+
+
+function classNames(...classes) {
+    return classes.filter(Boolean).join(' ')
+}
+
+function AssignedTo() {
+
+    return (
+      <Listbox value={selected} onChange={setSelected}>
+        {({ open }) => (
+          <>
+            <div className="relative">
+              <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm" placeholder='asignar tarea'>
+                <span className="flex items-center">
+                  <img src={selected.avatar} alt="" className="h-6 w-6 flex-shrink-0 rounded-full" />
+                  <span className="ml-3 block truncate text-black">{selected.name}</span>
+                </span>
+                <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
+                  <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                </span>
+              </Listbox.Button>
+  
+              <Transition
+                show={open}
+                as={Fragment}
+                leave="transition ease-in duration-100"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
+              >
+                <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                  {people.map((person) => (
+                    <Listbox.Option
+                      key={person.id}
+                      className={({ active }) =>
+                        classNames(
+                          active ? 'text-white bg-indigo-600' : 'text-gray-900',
+                          'relative cursor-default select-none py-2 pl-3 pr-9'
+                        )
+                      }
+                      value={person}
+                    >
+                      {({ selected, active }) => (
+                        <>
+                          <div className="flex items-center">
+                            <img src={person.avatar} alt="" className="h-6 w-6 flex-shrink-0 rounded-full" />
+                            <span
+                              className={classNames(selected ? 'font-semibold' : 'font-normal', 'ml-3 block truncate')}
+                            >
+                              {person.name}
+                            </span>
+                          </div>
+  
+                          {selected ? (
+                            <span
+                              className={classNames(
+                                active ? 'text-white' : 'text-indigo-600',
+                                'absolute inset-y-0 right-0 flex items-center pr-4'
+                              )}
+                            >
+                              <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                            </span>
+                          ) : null}
+                        </>
+                      )}
+                    </Listbox.Option>
+                  ))}
+                </Listbox.Options>
+              </Transition>
+            </div>
+          </>
+        )}
+      </Listbox>
+    )
+}
+  
+function handleChange(event) {
     const value = event.target.value;
     setTitle(value);
-  }
+    
+}
 
-  function handleSubmit(e) {
-    e.preventDefault();
+function handleSubmit(e) {
+
+
+    e.preventDefault()
     const current = new Date();
     const generateDate = `${current.getDate()}/${
       current.getMonth() + 1
@@ -22,16 +124,21 @@ export const ListaTareas = ({ onDelete }) => {
     const newTareas = {
       id: crypto.randomUUID(),
       title: title,
+      person: selected,
       complete: false,
       date: generateDate,
+      
     };
     const temp = [...tareas];
     temp.unshift(newTareas);
-
     setTareas(temp);
     setTitle("")
-  }
-  function handleDelete(id){
+
+    
+
+}
+
+function handleDelete(id){
     const temp = tareas.filter(item => item.id !== id);
     setTareas(temp)
  }
@@ -41,28 +148,40 @@ export const ListaTareas = ({ onDelete }) => {
   const item = temp.find(item => item.id === id);
   item.title = value;
   setTareas(temp)
+  
+
  }
- 
+
+
+
 
   return (
-    <div className="container mx-auto max-w-3xl px-4 sm:px-8">
+    <div className="container mx-auto max-w-5xl px-4 sm:px-8">
       <div className="py-8">
         <div className="mb-1 flex w-full flex-row justify-between sm:mb-0">
           <div className="text-end">
-            <form
+            <form 
+           
               onSubmit={handleSubmit}
-              className="flex w-3/4 max-w-sm flex-col justify-center space-y-3 md:w-full md:flex-row md:space-x-3 md:space-y-0"
+              className="flex w-3/4 flex-col justify-center space-y-3 md:w-full md:flex-row md:space-x-3 md:space-y-0"
             >
               <div className=" relative ">
                 <input
+                 
+                  required
                   type="text"
                   id='"form-subscribe-Filter'
                   className=" w-full flex-1 appearance-none rounded-lg border border-transparent border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600"
                   placeholder="Escribe tu tarea..."
                   value={title}
                   onChange={handleChange}
-                />
+                  
+              
+                  />
+              
               </div>
+              
+              <AssignedTo></AssignedTo>
               <button
                 onClick={handleSubmit}
                 className="flex-shrink-0 rounded-lg bg-black px-4 py-2 text-base font-semibold text-white shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-purple-200"
@@ -72,6 +191,7 @@ export const ListaTareas = ({ onDelete }) => {
               </button>
             </form>
           </div>
+       
           <div className="text-end">
             <form className="flex w-3/4 max-w-sm flex-col justify-center space-y-3 md:w-full md:flex-row md:space-x-3 md:space-y-0">
               <div className=" relative ">
@@ -132,9 +252,16 @@ export const ListaTareas = ({ onDelete }) => {
                   </tr>
                 </thead>
                 {tareas.map((item) => (
-              <AccionesTareas key={item.id} item={item}  value={title}
-                   onDelete={handleDelete} onUpdate={handleUpdateTarea}></AccionesTareas>
+                  
+                  <>
+                  
+              <AccionesTareas key={item.id} item={item} 
+                   onDelete={handleDelete} value={title} onUpdate={handleUpdateTarea}></AccionesTareas>
+
+      
+                   </>
                 ))}
+                
               </>
             </table>
 

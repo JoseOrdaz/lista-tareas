@@ -1,35 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import logo from "./tarea-completada.png";
-import ListaTareas from "./components/listaTareas"
-
+import ListaTareas from "./components/listaTareas";
 
 function App() {
-  const [title, setTitle] = useState([]);
-  const [todos, setTodos] = useState([]);
-
-  function handleChange(event) {
-  const value = event.target.value
-    setTitle(value)
-    
-  }
-
-  function handleSubmit(e){
-    e.preventDefault();
-    const current = new Date();
-    const generateDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()} - ${current.getHours()}:${current.getMinutes()}`;
-    const newTodo = {
-        id: crypto.randomUUID(),
-        title: title,
-        complete: false,
-        date: generateDate
-        
-    }
-    const temp = [...todos];
-    temp.unshift(newTodo);
-
-    setTodos(temp);
-
-  }
 
 
   return (
@@ -47,29 +20,50 @@ function App() {
         </h1>
         <h1 className="relative text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl"></h1>
       </div>
-      <nav class="fixed bottom-0 z-50 flex w-full justify-center gap-6 bg-gray-100 p-2 dark:bg-gray-900 sm:static sm:w-auto sm:bg-transparent sm:p-0">
-        <a
+      {/* <nav class="fixed bottom-0 z-50 flex w-full justify-center gap-6 bg-gray-100 p-2 dark:bg-gray-900 sm:static sm:w-auto sm:bg-transparent sm:p-0">
+        <button
           class="pointer-events-none flex w-1/4 flex-col items-center gap-1 rounded-lg p-2 text-xs text-gray-900 ring-gray-900 transition hover:text-gray-900 dark:text-yellow-300 dark:ring-yellow-300 dark:hover:text-yellow-300 sm:w-auto sm:flex-row sm:text-base sm:hover:ring-2"
-          href="/challenges"
+          onClick={setOtrasTareas}
         >
-     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-</svg>
-
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="h-6 w-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+            />
+          </svg>
           Tareas de Jose
-        </a>
-        <a
+        </button>
+        <button
           class="flex w-1/4 flex-col items-center gap-1 rounded-lg p-2 text-xs text-gray-500 ring-gray-900 transition hover:text-gray-900 dark:text-gray-100 dark:ring-yellow-300 dark:hover:text-yellow-300 sm:w-auto sm:flex-row sm:text-base sm:hover:ring-2"
-          href="/leaderboard"
+          onClick={setOtrasTareas}
         >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-</svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="h-6 w-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+            />
+          </svg>
           Tareas de Elena
-        </a>
-      
-      </nav>
-      <ListaTareas></ListaTareas>
+        </button>
+      </nav> */}
+      <ListaTareas />
+
       <p className="text-center font-semibold italic text-black">
         Desarrollado por{" "}
         <a
