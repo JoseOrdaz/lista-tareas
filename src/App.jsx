@@ -1,69 +1,21 @@
 import { useState } from "react";
-import logo from "./tarea-completada.png";
-import ListaTareas from "./components/listaTareas";
-
+import logo from "./organiza-tuvida.svg";
+import ListaTareas from "./components/ListaDeTareas";
 function App() {
-
-
   return (
     <header className="justify-top flex min-h-screen flex-col items-center bg-[#f4f4f4] text-white">
-      <div className="container mx-auto py-16 text-center sm:px-4 sm:py-16">
+      <div className="container mx-auto py-4 text-center sm:px-4 sm:py-4">
         <div className="flex items-center justify-center text-white">
-          <img src={logo} className="animate-wave mb-10 h-16 w-16" alt="logo" />
+          <img src={logo} className="mb-5 w-[200px]" alt="logo" />
         </div>
-
-        <h1 className="text-4xl font-extrabold leading-10 tracking-tight text-black sm:text-5xl sm:leading-none md:text-6xl xl:text-7xl">
+        <h1 className="text-4xl font-extrabold leading-10 tracking-tight text-black sm:text-5xl sm:leading-none md:text-6xl xl:text-5xl">
           <span className="block">Lista de Tareas</span>{" "}
-          <span className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-800 bg-clip-text text-5xl text-transparent lg:text-7xl">
+          <span className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-800 bg-clip-text text-5xl text-transparent lg:text-5xl">
             ¡Para organizar tu vida!
           </span>
         </h1>
-        <h1 className="relative text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl"></h1>
       </div>
-      {/* <nav class="fixed bottom-0 z-50 flex w-full justify-center gap-6 bg-gray-100 p-2 dark:bg-gray-900 sm:static sm:w-auto sm:bg-transparent sm:p-0">
-        <button
-          class="pointer-events-none flex w-1/4 flex-col items-center gap-1 rounded-lg p-2 text-xs text-gray-900 ring-gray-900 transition hover:text-gray-900 dark:text-yellow-300 dark:ring-yellow-300 dark:hover:text-yellow-300 sm:w-auto sm:flex-row sm:text-base sm:hover:ring-2"
-          onClick={setOtrasTareas}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="h-6 w-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
-            />
-          </svg>
-          Tareas de Jose
-        </button>
-        <button
-          class="flex w-1/4 flex-col items-center gap-1 rounded-lg p-2 text-xs text-gray-500 ring-gray-900 transition hover:text-gray-900 dark:text-gray-100 dark:ring-yellow-300 dark:hover:text-yellow-300 sm:w-auto sm:flex-row sm:text-base sm:hover:ring-2"
-          onClick={setOtrasTareas}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="h-6 w-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
-            />
-          </svg>
-          Tareas de Elena
-        </button>
-      </nav> */}
       <ListaTareas />
-
       <p className="text-center font-semibold italic text-black">
         Desarrollado por{" "}
         <a
