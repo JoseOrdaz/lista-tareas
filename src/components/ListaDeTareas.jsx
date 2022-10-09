@@ -11,12 +11,12 @@ const people = [
   {
     id: 1,
     name: "Jose Ordaz",
-    avatar: "/src/jose-ordaz.jpg",
+    avatar: "./jose-ordaz.jpg",
   },
   {
     id: 2,
     name: "Elena Martínez",
-    avatar: "/src/elena.jpg",
+    avatar: "./elena.jpg",
   },
 ];
 
