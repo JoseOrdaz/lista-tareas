@@ -3,8 +3,7 @@ import logoPapelera from "../papelera-de-reciclaje.svg";
 import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
-import DataPicker from "./DataPicker";
-import { format } from "date-fns";
+import ModalComponent from "./ModalComponent";
 
 export const AccionesTareas = ({ item, onDelete, onUpdate }) => {
   const status = [
@@ -37,6 +36,7 @@ export const AccionesTareas = ({ item, onDelete, onUpdate }) => {
     },
   ];
 
+  const [pulsado, setPulsado] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [selected, setSelectStatus] = useState(status[0]);
 
@@ -248,7 +248,12 @@ export const AccionesTareas = ({ item, onDelete, onUpdate }) => {
           </td>
           <td className="border-b border-gray-200 bg-white px-5 py-5 text-center text-sm">
             <a href="#" className="text-red-600 hover:text-indigo-900">
-              <button onClick={() => onDelete(item.id)}>
+              <button onClick={() => setPulsado(!pulsado)}>
+                {pulsado ? <ModalComponent 
+                      key={item.id}
+                      item={item}
+                      onDelete={onDelete}
+                /> : null}
                 <img
                   src={logoPapelera}
                   className="animate-wave  w-5"

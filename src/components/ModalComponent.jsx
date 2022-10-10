@@ -2,10 +2,9 @@ import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
-export default function ModalComponent() {
-  const [open, setOpen] = useState(true);
+export default function ModalComponent({ onDelete, item }) {
   const cancelButtonRef = useRef(null);
-
+  const [open, setOpen] = useState(true);
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -66,7 +65,7 @@ export default function ModalComponent() {
                   <button
                     type="button"
                     className="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-                    onClick={() => setOpen(false)}
+                    onClick={() => onDelete(item.id)}
                   >
                     Borrar
                   </button>

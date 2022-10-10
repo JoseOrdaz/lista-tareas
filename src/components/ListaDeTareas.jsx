@@ -5,7 +5,6 @@ import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import DataPicker from "./DataPicker";
 import { format } from "date-fns";
-import ModalComponent from "./ModalComponent";
 
 const people = [
   {
@@ -150,7 +149,6 @@ export const ListaTareas = () => {
     const temp = tareas.filter((item) => item.id !== id);
     setTareas(temp);
   }
-
   function handleUpdateTarea(id, value) {
     const temp = [...tareas];
     const item = temp.find((item) => item.id === id);
@@ -194,26 +192,6 @@ export const ListaTareas = () => {
               </button>
             </form>
           </div>
-          {/*Buscador*/}
-          {/* 
-          <div className="text-end">
-            <form className="flex w-3/4 max-w-sm flex-col justify-center space-y-3 md:w-full md:flex-row md:space-x-3 md:space-y-0">
-              <div className=" relative ">
-                <input
-                  type="text"
-                  id='"form-subscribe-Filter'
-                  className=" w-full flex-1 appearance-none rounded-lg border border-transparent border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600"
-                  placeholder="Buscar tarea..."
-                />
-              </div>
-              <button
-                className="flex-shrink-0 rounded-lg bg-black px-4 py-2 text-base font-semibold text-white shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-purple-200"
-                type="submit"
-              >
-                Buscar
-              </button>
-            </form>
-          </div> */}
         </div>
         <div className="-mx-4 overflow-x-auto px-4 py-4 sm:-mx-8 sm:px-8">
           <div className="inline-block min-w-full overflow-hidden rounded-lg bg-white shadow">
@@ -257,13 +235,6 @@ export const ListaTareas = () => {
                     >
                       Eliminar
                     </th>
-                    {/* <th
-                      scope="col"
-                      className="border-b border-gray-200 bg-white px-5 py-3 text-left text-sm font-bold uppercase text-gray-400"
-                    >
-                      {" "}
-                      Eliminar
-                    </th> */}
                   </tr>
                 </thead>
                 {tareas.map((item) => (
