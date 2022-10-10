@@ -10,8 +10,7 @@ export const AccionesTareas = ({ item, onDelete, onUpdate }) => {
     {
       id: 1,
       name: (
-        <span className="relative inline-block px-3 py-1 font-semibold leading-tight text-red-500">
-          <span className="absolute inset-0 rounded-full opacity-50"></span>
+        <span className="relative inline-block px-3 py-1 font-semibold bg-red-300 rounded-full leading-tight  text-red-800">
           <span className="relative">Pendiente</span>
         </span>
       ),
@@ -19,8 +18,7 @@ export const AccionesTareas = ({ item, onDelete, onUpdate }) => {
     {
       id: 2,
       name: (
-        <span className="relative inline-block px-3 py-1 font-semibold leading-tight text-green-500">
-          <span className="absolute inset-0 rounded-full opacity-50"></span>
+        <span className="relative inline-block px-3 py-1 font-semibold leading-tight bg-green-300 rounded-full text-green-800">
           <span className="relative">Realizado</span>
         </span>
       ),
@@ -28,7 +26,7 @@ export const AccionesTareas = ({ item, onDelete, onUpdate }) => {
     {
       id: 3,
       name: (
-        <span className="relative inline-block px-3 py-1 font-semibold leading-tight text-orange-500">
+        <span className="relative inline-block px-3 py-1 font-semibold leading-tight bg-orange-300 rounded-full text-orange-800">
           <span className="absolute inset-0 rounded-full opacity-50"></span>
           <span className="relative">En proceso</span>
         </span>
@@ -161,7 +159,7 @@ export const AccionesTareas = ({ item, onDelete, onUpdate }) => {
             </span>
           </td>
           <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-            <input
+            <textarea
               type="text"
               id='"form-subscribe-Filter'
               className=" w-full flex-1 appearance-none rounded-lg border border-transparent border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600"
@@ -193,7 +191,12 @@ export const AccionesTareas = ({ item, onDelete, onUpdate }) => {
           </td>
           <td className="border-b border-gray-200 bg-white px-5 py-5 text-center text-sm">
             <a href="#" className="text-red-600 hover:text-indigo-900">
-              <button onClick={() => onDelete(item.id)}>
+            <button onClick={() => setPulsado(!pulsado)}>
+                {pulsado ? <ModalComponent 
+                      key={item.id}
+                      item={item}
+                      onDelete={onDelete}
+                /> : null}
                 <img
                   src={logoPapelera}
                   className="animate-wave  w-5"

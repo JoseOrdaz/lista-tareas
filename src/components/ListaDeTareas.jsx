@@ -17,6 +17,11 @@ const people = [
     name: "Elena Martínez",
     avatar: "./elena-martinez.jpg",
   },
+  {
+    id: 3,
+    name: "Elena y Jose",
+    avatar: "./pareja.png",
+  },
 ];
 
 export const ListaTareas = () => {
@@ -34,8 +39,9 @@ export const ListaTareas = () => {
         {({ open }) => (
           <>
             <div className="relative">
+            <label class="text-gray-600 block text-sm text-left font-bold mb-3">Asginar la tarea a: </label>
               <Listbox.Button
-                className="relative w-full cursor-pointer rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-blue-800 focus:outline-none focus:ring-1 focus:ring-blue-800 sm:text-sm"
+                className="relative w-full cursor-pointer rounded-md bg-white py-2 pl-3 shadow-sm pr-10 text-left focus:border-blue-800 focus:outline-none focus:ring-1 focus:ring-blue-800 sm:text-sm"
                 placeholder="asignar tarea"
               >
                 <span className="flex items-center">
@@ -159,13 +165,14 @@ export const ListaTareas = () => {
   return (
     <div className="container mx-auto max-w-5xl px-4 sm:px-8">
       <div className="py-8">
-        <div className="mb-1 flex w-full flex-row justify-center sm:mb-0">
+        <div className="mb-1 justify-center">
           <div className="text-end">
             <form
               onSubmit={handleSubmit}
-              className="flex w-3/4 flex-col justify-center space-y-3 md:w-full md:flex-row md:space-x-3 md:space-y-0"
+              className="flex flex-col justify-center space-y-3 md:w-full md:flex-row md:space-x-3 md:space-y-0"
             >
               <div className=" relative ">
+              <label class="text-gray-600 block text-sm text-left font-bold mb-3">Tu nueva tarea: </label>
                 <input
                   type="text"
                   id='"form-subscribe-Filter'
@@ -178,18 +185,23 @@ export const ListaTareas = () => {
               </div>
 
               <AssignedTo></AssignedTo>
+              <div className=" relative ">
+              <label class="text-gray-600 block text-sm text-left font-bold mb-3">Seleccionar dia: </label>
+
               <DataPicker
                 setSelectedDate={setSelectedDate}
                 selectedDate={selectedDate}
               ></DataPicker>
-
+              </div>
+              <div className="relative mt-4 flex flex-col justify-end">
               <button
                 onClick={handleSubmit}
-                className="flex-shrink-0 rounded-lg bg-black px-4 py-2 text-base font-semibold text-white shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-purple-200"
+                className="rounded-lg bg-black px-4 py-2 text-base font-semibold text-white shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-purple-200"
                 type="submit"
               >
                 Añadir
               </button>
+              </div>
             </form>
           </div>
         </div>

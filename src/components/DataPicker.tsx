@@ -124,7 +124,7 @@ const decrement = () => {
       <div className="antialiased sans-serif">
         <div>
 
-            <div className="w-[150px]">
+            <div>
        
               <div className="relative">
                 <input type="hidden" name="date" />
@@ -157,7 +157,7 @@ const decrement = () => {
                 {showDatepicker && (
                   <div
                     className="bg-white mt-12 rounded-lg shadow p-4 absolute top-0 left-0"
-                    style={{ width: "17rem" }}
+                    style={{ width: "17rem", zIndex:999 }}
                   >
                     <div className="flex justify-between items-center mb-2">
                       <div>
