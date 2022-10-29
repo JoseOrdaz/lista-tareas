@@ -29,7 +29,6 @@ export const ListaTareas = () => {
   const [tareas, setTareas] = useState([]);
   const [selected, setSelected] = useState(people[0]);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [open, setOpen] = useState(false);
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -161,10 +160,7 @@ export const ListaTareas = () => {
     const item = temp.find((item) => item.id === id);
     item.title = value;
     setTareas(temp);
-    setOpen(false)
-
   }
-console.log(tareas)
 
   return (
     <div className="container mx-auto max-w-5xl px-4 sm:px-8">
@@ -190,7 +186,7 @@ console.log(tareas)
 
               <AssignedTo></AssignedTo>
               <div className=" relative ">
-              <label class="text-gray-600 block text-sm text-left font-bold mb-3">Seleccionar día: </label>
+              <label class="text-gray-600 block text-sm text-left font-bold mb-3">Seleccionar dia: </label>
 
               <DataPicker
                 setSelectedDate={setSelectedDate}
@@ -209,24 +205,65 @@ console.log(tareas)
             </form>
           </div>
         </div>
-        <div className=" max-w-3xl m-auto flex items-center p-2">
-          <div className="inline-block min-w-full overflow-hidden bg-white shadow rounded-lg">
-
+        <div className="-mx-4 overflow-x-auto px-4 py-4 sm:-mx-8 sm:px-8">
+          <div className="inline-block min-w-full overflow-hidden p-2 rounded-lg">
+          <table className="min-w-full leading-normal shadow rounded-lg bg-white">
+              <>
+                <thead>
+                  <tr>
+                  
+                    <th
+                      scope="col"
+                      className="border-b border-gray-200 px-5 py-3 text-left text-sm font-bold uppercase text-gray-400"
+                    >
+                      Tarea
+                    </th>
+                    <th
+                      scope="col"
+                      className="border-b border-gray-200 px-5 py-3 text-left text-sm font-bold uppercase text-gray-400"
+                    >
+                      Usuario
+                    </th>
+                    <th
+                      scope="col"
+                      className="border-b border-gray-200 px-5 py-3 text-left text-sm font-bold uppercase text-gray-400"
+                    >
+                      Fecha
+                    </th>
+                    
+                    <th
+                      scope="col"
+                      className="border-b border-gray-200 px-5 py-3 text-left text-sm font-bold uppercase text-gray-400"
+                    >
+                      Estado de la Tarea
+                    </th>
+                    <th
+                      scope="col"
+                      className="border-b border-gray-200 px-5 py-3 text-left text-sm font-bold uppercase text-gray-400"
+                    >
+                      Acciones
+                    </th>
+                    <th
+                      scope="col"
+                      className="border-b border-gray-200 px-5 py-3 text-left text-sm font-bold uppercase text-gray-400"
+                    >
+                      Eliminar
+                    </th>
+                  </tr>
+                </thead>
                 {tareas.map((item) => (
                   <>
                     <AccionesTareas
                       key={item.id}
                       item={item}
                       onDelete={handleDelete}
-                      onUpdate={handleUpdateTarea}
-                      setOpen={setOpen}
-                      open={open}
                       value={title}
+                      onUpdate={handleUpdateTarea}
                     ></AccionesTareas>
                   </>
                 ))}
-       
-            {/* Consulta mas info */}
+              </>
+            </table>
             <div className=" w-full py-6 sm:px-6 lg:px-8">
               <div className="px-4 py-6 sm:px-0">
                 <div className="min-h-[auto] rounded-lg border-4 border-dashed border-gray-200 px-4 py-6">

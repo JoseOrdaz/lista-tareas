@@ -45,3 +45,62 @@
   /* -webkit-animation: wave 2.5s ease-in-out infinite; */
   animation: wave 2.5s cubic-bezier(1, 0.1, 0.57, 1) infinite;
 }
+
+.titulo-tarea {
+    width: 100%!important;
+    max-width: inherit!important;
+}
+/*
+@media screen and (max-width: 600px) {
+            table {
+              width: 100%;
+              display: flex;
+              flex-direction: column;
+              flex-wrap: nowrap;
+              background: transparent!important;
+              box-shadow: none!important;
+          }
+
+
+       thead {
+           display: none;
+       }
+       tr:nth-of-type(2n) {
+           background-color: inherit;
+       }
+       tr td:first-child {
+           font-weight:bold;
+       }
+       tbody td {
+           display: block;
+           text-align:center;
+       }
+       tbody td:before {
+           content: attr(data-th);
+           display: block;
+           text-align:center;
+       }
+       tbody {
+    width: 100%;
+}
+
+tr {
+    width: 100%!important;
+    display: block;
+}
+
+       .only-mobile{
+       display:block!important;}
+
+       tbody {
+    background: #fff;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+}
+
+.only-mobile{
+       display:none;}*/

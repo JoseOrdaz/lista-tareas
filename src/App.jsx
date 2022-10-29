@@ -6,9 +6,9 @@ function App() {
     <header className="justify-top flex min-h-screen flex-col items-center bg-[#f4f4f4] text-white">
       <div className="container mx-auto py-4 text-center sm:px-4 sm:py-4">
         <div className="flex items-center justify-center text-white">
-          <img src={logo} className="mb-5 w-[200px]" alt="logo" />
+          <img src={logo} className="mb-5 w-[140px]" alt="logo" />
         </div>
-        <h1 className="text-4xl font-extrabold leading-10 tracking-tight text-black sm:text-5xl sm:leading-none md:text-6xl xl:text-5xl">
+        <h1 className="text-4xl font-extrabold leading-10 tracking-tight text-black sm:text-5xl sm:leading-none md:text-6xl xl:text-3xl">
           <span className="block">Lista de Tareas</span>{" "}
           <span className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-800 bg-clip-text  text-transparent lg:text-3xl sm:text-2xl md:text-3xl">
             ¡Para organizar tu vida!
