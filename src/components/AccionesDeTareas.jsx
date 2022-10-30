@@ -3,7 +3,7 @@ import { Fragment, useRef, useState } from "react";
 import {Listbox, Dialog, Transition } from "@headlessui/react";
 
 
-export const AccionesTareas = ({ item, onDelete, onUpdate, setOpen, open }) => {
+export const AccionesTareas = ({ item, onDelete, onUpdate }) => {
   const status = [
     {
       id: 1,
@@ -71,12 +71,13 @@ export const AccionesTareas = ({ item, onDelete, onUpdate, setOpen, open }) => {
     },
   ];
   const [selected, setSelectStatus] = useState(status[0]);
+  const [open, setOpen] = useState(false);
 
+  function SelectStatus() {
+    
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
-
-  function SelectStatus() {
     return (
       <Listbox value={selected} onChange={setSelectStatus}>
         {({ open }) => (
@@ -155,7 +156,7 @@ export const AccionesTareas = ({ item, onDelete, onUpdate, setOpen, open }) => {
   function TareasElement() {
 
     function abrirModal(){
-    
+      
       setOpen(true)
     }
 

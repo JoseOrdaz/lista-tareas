@@ -30,11 +30,50 @@ export const ListaTareas = () => {
   const [selected, setSelected] = useState(people[0]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [open, setOpen] = useState(false);
+  
 
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(" ");
+  
+  function handleChange(event) {
+    const value = event.target.value;
+    setTitle(value);
+  }
+  function handleSubmit(e) {
+    if (e.target.value === "") {
+    } else {
+      e.preventDefault();
+      const current = new Date();
+      const generateDate = `${current.getDate()}/${
+        current.getMonth() + 1
+      }/${current.getFullYear()}`;
+      const newTareas = {
+        id: crypto.randomUUID(),
+        title: title,
+        person: selected,
+        complete: false,
+        date: format(selectedDate, "yyyy-MM-dd"),
+      };
+      const temp = [...tareas];
+      temp.unshift(newTareas);
+      setTareas(temp);
+      setTitle("");
+    }
+  }
+  function handleDelete(id) {
+    const temp = tareas.filter((item) => item.id !== id);
+    setTareas(temp);
+  }
+  function handleUpdateTarea(id, value) {
+    const temp = [...tareas];
+    const item = temp.find((item) => item.id === id);
+    item.title = value;
+    setTareas(temp);
+    setOpen(false)
+
   }
   function AssignedTo() {
+    function classNames(...classes) {
+      return classes.filter(Boolean).join(" ");
+    }
     return (
       <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
@@ -127,44 +166,7 @@ export const ListaTareas = () => {
       </Listbox>
     );
   }
-  function handleChange(event) {
-    const value = event.target.value;
-    setTitle(value);
-  }
-  function handleSubmit(e) {
-    if (e.target.value === "") {
-    } else {
-      e.preventDefault();
-      const current = new Date();
-      const generateDate = `${current.getDate()}/${
-        current.getMonth() + 1
-      }/${current.getFullYear()}`;
-      const newTareas = {
-        id: crypto.randomUUID(),
-        title: title,
-        person: selected,
-        complete: false,
-        date: format(selectedDate, "yyyy-MM-dd"),
-      };
-      const temp = [...tareas];
-      temp.unshift(newTareas);
-      setTareas(temp);
-      setTitle("");
-    }
-  }
-  function handleDelete(id) {
-    const temp = tareas.filter((item) => item.id !== id);
-    setTareas(temp);
-  }
-  function handleUpdateTarea(id, value) {
-    const temp = [...tareas];
-    const item = temp.find((item) => item.id === id);
-    item.title = value;
-    setTareas(temp);
-    setOpen(false)
 
-  }
-console.log(tareas)
 
   return (
     <div className="container mx-auto max-w-5xl px-4 sm:px-8">
