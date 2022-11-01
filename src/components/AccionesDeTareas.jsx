@@ -23,7 +23,7 @@ export const AccionesTareas = ({ item, onDelete, onUpdate, status, estado, setSe
         <li>
           <div className="px-4 py-4 sm:px-6">
             <div className="flex items-center justify-between">
-              <div className="truncate text-sm font-medium text-indigo-600">
+              <div className="truncate text-sm font-medium text-blue-600">
                 {item.person.name}
               </div>
               <div className="flex items-center text-sm text-gray-500">
