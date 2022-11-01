@@ -1,10 +1,13 @@
 import React from "react";
 import { Fragment, useRef, useState } from "react";
-import { Dialog, Transition } from "@headlessui/react";
+import { Dialog, Transition, Listbox } from "@headlessui/react";
+import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
+import { SelectStatus } from "./SelectStatus";
 
-export const AccionesTareas = ({ item, onDelete, onUpdate }) => {
+export const AccionesTareas = ({ item, onDelete, onUpdate, status, estado, setSelectStatus}) => {
 
   const [open, setOpen] = useState(false);
+
 
   function TareasElement() {
 
@@ -88,9 +91,12 @@ export const AccionesTareas = ({ item, onDelete, onUpdate }) => {
     );
   }
 
+
+
   function ModalComponent() {
     const cancelButtonRef = useRef(null);
     const [newValue, setNewValue] = useState(item.title);
+    const [newStatus, setNewStatus] = useState(item.state);
 
     function handleSubmit(e) {
       e.preventDefault();
@@ -102,7 +108,7 @@ export const AccionesTareas = ({ item, onDelete, onUpdate }) => {
     }
 
     function handleClickUpdateTarea() {
-      onUpdate(item.id, newValue);
+      onUpdate(item.id, newValue, newStatus);
       setOpen(false);
     }
 
@@ -137,7 +143,7 @@ export const AccionesTareas = ({ item, onDelete, onUpdate }) => {
                 leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
-                <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                <Dialog.Panel className="relative transform rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                   <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                     <div className="sm:flex sm:items-start">
                       <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-gray-100 sm:mx-0 sm:h-10 sm:w-10">
@@ -183,6 +189,11 @@ export const AccionesTareas = ({ item, onDelete, onUpdate }) => {
                             onSubmit={handleSubmit}
                           />
                         </div>
+                          <SelectStatus
+                             estado={newStatus}
+                             setSelectStatus={setNewStatus}
+                             status={status}
+                          ></SelectStatus>
                       </div>
                     </div>
                   </div>

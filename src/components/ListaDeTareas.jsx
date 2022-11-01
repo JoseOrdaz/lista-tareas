@@ -5,6 +5,8 @@ import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import DataPicker from "./DataPicker";
 import { format } from "date-fns";
+import { SelectStatus } from "./SelectStatus";
+
 
 const people = [
   {
@@ -29,7 +31,7 @@ const status = [
     id: 1,
     title: "Pendiente",
     name: (
-      <span class="relative inline-block rounded-full bg-red-300 p-[2px] font-semibold leading-tight  text-red-800">
+      <span className="relative inline-block rounded-full bg-red-300 p-[2px] font-semibold leading-tight  text-red-800">
         <span className="flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +53,7 @@ const status = [
     id: 2,
     title: "Realizada",
     name: (
-      <span className="relative inline-block rounded-full bg-green-300 p-1 font-semibold leading-tight text-green-800">
+      <span className="relative inline-block rounded-full bg-green-300 p-[2px] font-semibold leading-tight text-green-800">
         <span className="flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +75,7 @@ const status = [
     id: 3,
     title: "En curso",
     name: (
-      <span className="relative inline-block rounded-full bg-orange-300 p-1 font-semibold leading-tight text-orange-800">
+      <span className="relative inline-block rounded-full bg-orange-300  p-[2px] font-semibold leading-tight text-orange-800">
         <span className="absolute inset-0 rounded-full opacity-50"></span>
         <span className="flex items-center">
           <svg
@@ -131,13 +133,17 @@ export const ListaTareas = () => {
     const temp = tareas.filter((item) => item.id !== id);
     setTareas(temp);
   }
-  function handleUpdateTarea(id, value) {
+  function handleUpdateTarea(id, value, newestado) {
     const temp = [...tareas];
     const item = temp.find((item) => item.id === id);
     item.title = value;
+    item.state = newestado; 
     setTareas(temp);
     setOpen(false);
+    console.log(item.state)
   }
+
+
   function AssignedTo() {
     function classNames(...classes) {
       return classes.filter(Boolean).join(" ");
@@ -236,100 +242,100 @@ export const ListaTareas = () => {
       </Listbox>
     );
   }
-  function SelectStatus() {
-    function classNames(...classes) {
-      return classes.filter(Boolean).join(" ");
-    }
-    return (
+  // function SelectStatus() {
+  //   function classNames(...classes) {
+  //     return classes.filter(Boolean).join(" ");
+  //   }
+  //   return (
   
 
-      <Listbox key={status.id} value={estado} onChange={setSelectStatus}>
-      {({ open }) => (
-        <>
-          <div className="relative">
-            <label className="mb-3 block text-left text-sm font-bold text-gray-600">
-              Estado:{" "}
-            </label>
-            <Listbox.Button
-              className="relative w-full cursor-pointer rounded-md bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-blue-800 focus:outline-none focus:ring-1 focus:ring-blue-800 sm:text-sm"
-              placeholder="asignar tarea"
-            >
-              <span className="flex items-center">
-              {estado.name}
-                <span className="ml-3 block truncate text-black">
-                  {estado.title}
-                </span>
-              </span>
-              <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
-                <ChevronUpDownIcon
-                  className="h-5 w-5 text-gray-400"
-                  aria-hidden="true"
-                />
-              </span>
-            </Listbox.Button>
+  //     <Listbox key={status.id} value={estado} onChange={setSelectStatus}>
+  //     {({ open }) => (
+  //       <>
+  //         <div className="relative">
+  //           <label className="mb-3 block text-left text-sm font-bold text-gray-600">
+  //             Estado:{" "}
+  //           </label>
+  //           <Listbox.Button
+  //             className="relative w-full cursor-pointer rounded-md bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-blue-800 focus:outline-none focus:ring-1 focus:ring-blue-800 sm:text-sm"
+  //             placeholder="asignar tarea"
+  //           >
+  //             <span className="flex items-center">
+  //             {estado.name}
+  //               <span className="ml-3 block truncate text-black">
+  //                 {estado.title}
+  //               </span>
+  //             </span>
+  //             <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
+  //               <ChevronUpDownIcon
+  //                 className="h-5 w-5 text-gray-400"
+  //                 aria-hidden="true"
+  //               />
+  //             </span>
+  //           </Listbox.Button>
 
-            <Transition
-              show={open}
-              as={Fragment}
-              leave="transition ease-in duration-100"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0"
-            >
-              <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full cursor-pointer overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                {status.map((state) => (
-                  <Listbox.Option
-                    key={state.id}
-                    className={({ active }) =>
-                      classNames(
-                        active
-                          ? " cursor-pointer bg-slate-300 text-white"
-                          : "text-gray-900",
-                        "relative cursor-pointer select-none py-2 pl-3 pr-9"
-                      )
-                    }
-                    value={state}
-                  >
-                    {({ setSelectStatus, active }) => (
-                      <>
-                        <div className="flex items-center">
-                        {state.name}
-                          <span
-                            className={classNames(
-                              setSelectStatus ? "font-semibold" : "font-normal",
-                              "ml-3 block truncate"
-                            )}
-                          >
-                            {state.title}
-                          </span>
-                        </div>
+  //           <Transition
+  //             show={open}
+  //             as={Fragment}
+  //             leave="transition ease-in duration-100"
+  //             leaveFrom="opacity-100"
+  //             leaveTo="opacity-0"
+  //           >
+  //             <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full cursor-pointer overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+  //               {status.map((state) => (
+  //                 <Listbox.Option
+  //                   key={state.id}
+  //                   className={({ active }) =>
+  //                     classNames(
+  //                       active
+  //                         ? " cursor-pointer bg-slate-300 text-white"
+  //                         : "text-gray-900",
+  //                       "relative cursor-pointer select-none py-2 pl-3 pr-9"
+  //                     )
+  //                   }
+  //                   value={state}
+  //                 >
+  //                   {({ setSelectStatus, active }) => (
+  //                     <>
+  //                       <div className="flex items-center">
+  //                       {state.name}
+  //                         <span
+  //                           className={classNames(
+  //                             setSelectStatus ? "font-semibold" : "font-normal",
+  //                             "ml-3 block truncate"
+  //                           )}
+  //                         >
+  //                           {state.title}
+  //                         </span>
+  //                       </div>
 
-                        {setSelectStatus ? (
-                          <span
-                            className={classNames(
-                              active ? "text-white" : "text-blue-600",
-                              "absolute inset-y-0 right-0 flex items-center pr-4"
-                            )}
-                          >
-                            <CheckIcon
-                              className="h-5 w-5"
-                              aria-hidden="true"
-                            />
-                          </span>
-                        ) : null}
-                      </>
-                    )}
-                  </Listbox.Option>
-                ))}
-              </Listbox.Options>
-            </Transition>
-          </div>
-        </>
-      )}
-    </Listbox>
+  //                       {setSelectStatus ? (
+  //                         <span
+  //                           className={classNames(
+  //                             active ? "text-white" : "text-blue-600",
+  //                             "absolute inset-y-0 right-0 flex items-center pr-4"
+  //                           )}
+  //                         >
+  //                           <CheckIcon
+  //                             className="h-5 w-5"
+  //                             aria-hidden="true"
+  //                           />
+  //                         </span>
+  //                       ) : null}
+  //                     </>
+  //                   )}
+  //                 </Listbox.Option>
+  //               ))}
+  //             </Listbox.Options>
+  //           </Transition>
+  //         </div>
+  //       </>
+  //     )}
+  //   </Listbox>
 
 
-    );
-  }
+  //   );
+  // }
 
   return (
     <div className="container mx-auto max-w-5xl px-4 sm:px-8">
@@ -356,7 +362,11 @@ export const ListaTareas = () => {
               </div>
               <AssignedTo key={tareas.person}></AssignedTo>{" "}
               <div className=" relative ">
-              <SelectStatus></SelectStatus>
+              <SelectStatus
+              estado={estado}
+              setSelectStatus={setSelectStatus}
+              status={status}
+              ></SelectStatus>
 
               </div>
               {/* <label className="mb-3 block text-left text-sm font-bold text-gray-600">Seleccionar estado: 
@@ -394,10 +404,10 @@ export const ListaTareas = () => {
                   item={item}
                   onDelete={handleDelete}
                   onUpdate={handleUpdateTarea}
-                  setSelectStatus={setSelectStatus}
-                  estado={estado}
-                  status={status}
                   key={item.state}
+                  estado={estado}
+                  setSelectStatus={setSelectStatus}
+                  status={status}
                 ></AccionesTareas>
 
               </>
@@ -445,3 +455,4 @@ export const ListaTareas = () => {
 };
 
 export default ListaTareas;
+
