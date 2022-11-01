@@ -10,12 +10,12 @@ function App() {
         </div>
         <h1 className="text-4xl font-extrabold leading-10 tracking-tight text-black sm:text-5xl sm:leading-none md:text-6xl xl:text-3xl">
           <span className="block">Lista de Tareas</span>{" "}
-          <span className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-800 bg-clip-text  text-transparent lg:text-3xl sm:text-2xl md:text-3xl">
+          <span className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-800 bg-clip-text  text-transparent sm:text-2xl md:text-3xl lg:text-3xl">
             ¡Para organizar tu vida!
           </span>
         </h1>
       </div>
-      <ListaTareas />
+      <ListaTareas></ListaTareas>
       <p className="text-center font-semibold italic text-black">
         Desarrollado por{" "}
         <a

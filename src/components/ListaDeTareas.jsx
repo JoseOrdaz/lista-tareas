@@ -24,15 +24,84 @@ const people = [
   },
 ];
 
+const status = [
+  {
+    id: 1,
+    title: "Pendiente",
+    name: (
+      <span className="relative inline-block rounded-full bg-red-300 p-1 font-semibold leading-tight  text-red-800">
+        <span className="flex items-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            className="h-5 w-5"
+          >
+            <path
+              fillRule="evenodd"
+              d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </span>
+      </span>
+    ),
+  },
+  {
+    id: 2,
+    title: "Realizada",
+    name: (
+      <span className="relative inline-block rounded-full bg-green-300 p-1 font-semibold leading-tight text-green-800">
+        <span className="flex items-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            className="h-5 w-5"
+          >
+            <path
+              fillRule="evenodd"
+              d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+              clipRule="evenodd"
+            />
+          </svg>{" "}
+        </span>
+      </span>
+    ),
+  },
+  {
+    id: 3,
+    title: "En curso",
+    name: (
+      <span className="relative inline-block rounded-full bg-orange-300 p-1 font-semibold leading-tight text-orange-800">
+        <span className="absolute inset-0 rounded-full opacity-50"></span>
+        <span className="flex items-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            className="h-5 w-5"
+          >
+            <path
+              fillRule="evenodd"
+              d="M15.312 11.424a5.5 5.5 0 01-9.201 2.466l-.312-.311h2.433a.75.75 0 000-1.5H3.989a.75.75 0 00-.75.75v4.242a.75.75 0 001.5 0v-2.43l.31.31a7 7 0 0011.712-3.138.75.75 0 00-1.449-.39zm1.23-3.723a.75.75 0 00.219-.53V2.929a.75.75 0 00-1.5 0V5.36l-.31-.31A7 7 0 003.239 8.188a.75.75 0 101.448.389A5.5 5.5 0 0113.89 6.11l.311.31h-2.432a.75.75 0 000 1.5h4.243a.75.75 0 00.53-.219z"
+              clipRule="evenodd"
+            />
+          </svg>{" "}
+        </span>
+      </span>
+    ),
+  },
+];
+
 export const ListaTareas = () => {
   const [title, setTitle] = useState([]);
   const [tareas, setTareas] = useState([]);
-  const [selected, setSelected] = useState(people[0]);
+  const [selectedUser, setSelected] = useState(people[0]);
+  const [estado, setSelectStatus] = useState(status[0]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [open, setOpen] = useState(false);
-  
 
-  
   function handleChange(event) {
     const value = event.target.value;
     setTitle(value);
@@ -48,8 +117,8 @@ export const ListaTareas = () => {
       const newTareas = {
         id: crypto.randomUUID(),
         title: title,
-        person: selected,
-        complete: false,
+        person: selectedUser,
+        state: estado,
         date: format(selectedDate, "yyyy-MM-dd"),
       };
       const temp = [...tareas];
@@ -67,31 +136,32 @@ export const ListaTareas = () => {
     const item = temp.find((item) => item.id === id);
     item.title = value;
     setTareas(temp);
-    setOpen(false)
-
+    setOpen(false);
   }
   function AssignedTo() {
     function classNames(...classes) {
       return classes.filter(Boolean).join(" ");
     }
     return (
-      <Listbox value={selected} onChange={setSelected}>
+      <Listbox key={tareas.id} value={selectedUser} onChange={setSelected}>
         {({ open }) => (
           <>
             <div className="relative">
-            <label class="text-gray-600 block text-sm text-left font-bold mb-3">Asginar la tarea a: </label>
+              <label className="mb-3 block text-left text-sm font-bold text-gray-600">
+                Asginar la tarea a:{" "}
+              </label>
               <Listbox.Button
-                className="relative w-full cursor-pointer rounded-md bg-white py-2 pl-3 shadow-sm pr-10 text-left focus:border-blue-800 focus:outline-none focus:ring-1 focus:ring-blue-800 sm:text-sm"
+                className="relative w-full cursor-pointer rounded-md bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-blue-800 focus:outline-none focus:ring-1 focus:ring-blue-800 sm:text-sm"
                 placeholder="asignar tarea"
               >
                 <span className="flex items-center">
                   <img
-                    src={selected.avatar}
+                    src={selectedUser.avatar}
                     alt=""
                     className="h-6 w-6 flex-shrink-0 rounded-full"
                   />
                   <span className="ml-3 block truncate text-black">
-                    {selected.name}
+                    {selectedUser.name}
                   </span>
                 </span>
                 <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
@@ -123,7 +193,7 @@ export const ListaTareas = () => {
                       }
                       value={person}
                     >
-                      {({ selected, active }) => (
+                      {({ selectedUser, active }) => (
                         <>
                           <div className="flex items-center">
                             <img
@@ -133,7 +203,7 @@ export const ListaTareas = () => {
                             />
                             <span
                               className={classNames(
-                                selected ? "font-semibold" : "font-normal",
+                                selectedUser ? "font-semibold" : "font-normal",
                                 "ml-3 block truncate"
                               )}
                             >
@@ -141,7 +211,7 @@ export const ListaTareas = () => {
                             </span>
                           </div>
 
-                          {selected ? (
+                          {selectedUser ? (
                             <span
                               className={classNames(
                                 active ? "text-white" : "text-blue-600",
@@ -166,7 +236,173 @@ export const ListaTareas = () => {
       </Listbox>
     );
   }
+  function SelectStatus() {
+    function classNames(...classes) {
+      return classes.filter(Boolean).join(" ");
+    }
+    return (
+      // <Listbox value={estado} key={status.id} onChange={setSelectStatus}>
+      //   {({ open }) => (
+      //     <>
+      //       <div className="relative">
+      //         <Listbox.Button
+      //           className="relative w-full cursor-pointer text-left focus:outline-none sm:text-sm"
+      //           placeholder="asignar tarea"
+      //         >
+      //           <span className="flex items-center">
+      //             <span className="relative inline-block font-semibold leading-tight">
+      //               <span className="rounded-ful absolute inset-0"></span>
+      //               {estado.name}
+                  
+      //             </span>
+      //             <span class="ml-3 block truncate text-black">{estado.title}</span>
+      //           </span>
+      //         </Listbox.Button>
 
+      //         <Transition
+      //           show={open}
+      //           as={Fragment}
+      //           leave="transition ease-in duration-100"
+      //           leaveFrom="opacity-100"
+      //           leaveTo="opacity-0"
+      //         >
+      //           <Listbox.Options className="absolute left-[-6px] z-10 mt-1 max-h-56 rounded-lg bg-white p-2 text-base shadow sm:text-sm">
+      //             {status.map((state) => (
+      //               <Listbox.Option
+      //                 key={state.id}
+      //                 className={({ active }) =>
+      //                   classNames(
+      //                     active ? "text-white" : "text-gray-900",
+      //                     "relative cursor-pointer select-none"
+      //                   )
+      //                 }
+      //                 value={state}
+      //               >
+      //                 {({ estado, active }) => (
+      //                   <>
+      //                     <div className="flex items-center">
+      //                       <span
+      //                         className={classNames(
+      //                           estado ? "font-semibold" : "font-normal",
+      //                           "block truncate"
+      //                         )}
+      //                       >
+      //                         {state.name}
+      //                       </span>
+      //                       <span class="ml-3 block truncate text-black">{state.title}</span>
+      //                     </div>
+
+      //                     {estado ? (
+      //                       <span
+      //                         className={classNames(
+      //                           active ? " text-gray-900" : "text-blue-600",
+      //                           "absolute inset-y-0 right-0 flex items-center pr-4"
+      //                         )}
+      //                       >
+      //                         {/* <CheckIcon
+      //                           className="h-5 w-5"
+      //                           aria-hidden="true"
+      //                         /> */}
+      //                       </span>
+      //                     ) : null}
+      //                   </>
+      //                 )}
+      //               </Listbox.Option>
+      //             ))}
+      //           </Listbox.Options>
+      //         </Transition>
+      //       </div>
+      //     </>
+      //   )}
+      // </Listbox>
+
+      <Listbox key={status.id} value={estado} onChange={setSelectStatus}>
+      {({ open }) => (
+        <>
+          <div className="relative">
+            <label className="mb-3 block text-left text-sm font-bold text-gray-600">
+              Estado:{" "}
+            </label>
+            <Listbox.Button
+              className="relative w-full cursor-pointer rounded-md bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-blue-800 focus:outline-none focus:ring-1 focus:ring-blue-800 sm:text-sm"
+              placeholder="asignar tarea"
+            >
+              <span className="flex items-center">
+              {estado.name}
+                <span className="ml-3 block truncate text-black">
+                  {estado.title}
+                </span>
+              </span>
+              <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
+                <ChevronUpDownIcon
+                  className="h-5 w-5 text-gray-400"
+                  aria-hidden="true"
+                />
+              </span>
+            </Listbox.Button>
+
+            <Transition
+              show={open}
+              as={Fragment}
+              leave="transition ease-in duration-100"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full cursor-pointer overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                {status.map((state) => (
+                  <Listbox.Option
+                    key={state.id}
+                    className={({ active }) =>
+                      classNames(
+                        active
+                          ? " cursor-pointer bg-slate-300 text-white"
+                          : "text-gray-900",
+                        "relative cursor-pointer select-none py-2 pl-3 pr-9"
+                      )
+                    }
+                    value={state}
+                  >
+                    {({ setSelectStatus, active }) => (
+                      <>
+                        <div className="flex items-center">
+                        {state.name}
+                          <span
+                            className={classNames(
+                              setSelectStatus ? "font-semibold" : "font-normal",
+                              "ml-3 block truncate"
+                            )}
+                          >
+                            {state.title}
+                          </span>
+                        </div>
+
+                        {setSelectStatus ? (
+                          <span
+                            className={classNames(
+                              active ? "text-white" : "text-blue-600",
+                              "absolute inset-y-0 right-0 flex items-center pr-4"
+                            )}
+                          >
+                            <CheckIcon
+                              className="h-5 w-5"
+                              aria-hidden="true"
+                            />
+                          </span>
+                        ) : null}
+                      </>
+                    )}
+                  </Listbox.Option>
+                ))}
+              </Listbox.Options>
+            </Transition>
+          </div>
+        </>
+      )}
+    </Listbox>
+
+
+    );
+  }
 
   return (
     <div className="container mx-auto max-w-5xl px-4 sm:px-8">
@@ -178,7 +414,9 @@ export const ListaTareas = () => {
               className="flex flex-col justify-center space-y-3 md:w-full md:flex-row md:space-x-3 md:space-y-0"
             >
               <div className=" relative ">
-              <label class="text-gray-600 block text-sm text-left font-bold mb-3">Tu nueva tarea: </label>
+                <label className="mb-3 block text-left text-sm font-bold text-gray-600">
+                  Tu nueva tarea:{" "}
+                </label>
                 <input
                   type="text"
                   id='"form-subscribe-Filter'
@@ -189,45 +427,55 @@ export const ListaTareas = () => {
                   required
                 />
               </div>
-
-              <AssignedTo></AssignedTo>
+              <AssignedTo key={tareas.person}></AssignedTo>{" "}
               <div className=" relative ">
-              <label class="text-gray-600 block text-sm text-left font-bold mb-3">Seleccionar día: </label>
+              <SelectStatus></SelectStatus>
 
-              <DataPicker
-                setSelectedDate={setSelectedDate}
-                selectedDate={selectedDate}
-              ></DataPicker>
+              </div>
+              {/* <label className="mb-3 block text-left text-sm font-bold text-gray-600">Seleccionar estado: 
+              <div className="cursor-pointer w-auto rounded-md bg-white p-2 shadow-sm focus:border-blue-800 focus:ring-1 focus:ring-blue-800 sm:text-sm">
+              <SelectStatus></SelectStatus></div>
+              </label> */}
+              <div className=" relative ">
+                <label className="mb-3 block text-left text-sm font-bold text-gray-600">
+                  Seleccionar día:{" "}
+                </label>
+
+                <DataPicker
+                  setSelectedDate={setSelectedDate}
+                  selectedDate={selectedDate}
+                  key={tareas.date}
+                ></DataPicker>
               </div>
               <div className="relative mt-4 flex flex-col justify-end">
-              <button
-                onClick={handleSubmit}
-                className=" rounded-lg bg-black px-4 py-2 text-base font-semibold text-white shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-purple-200"
-                type="submit"
-              >
-                Añadir tarea
-              </button>
+                <button
+                  onClick={handleSubmit}
+                  className=" rounded-lg bg-black px-4 py-2 text-base font-semibold text-white shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-purple-200"
+                  type="submit"
+                >
+                  Añadir tarea
+                </button>
               </div>
             </form>
           </div>
         </div>
-        <div className=" max-w-3xl m-auto flex items-center p-2">
-          <div className="inline-block min-w-full overflow-hidden bg-white shadow rounded-lg">
+        <div className=" m-auto flex max-w-3xl items-center p-2">
+          <div className="inline-block min-w-full overflow-hidden rounded-lg bg-white shadow">
+            {tareas.map((item) => (
+              <>
+                <AccionesTareas
+                  item={item}
+                  onDelete={handleDelete}
+                  onUpdate={handleUpdateTarea}
+                  setSelectStatus={setSelectStatus}
+                  estado={estado}
+                  status={status}
+                  key={item.state}
+                ></AccionesTareas>
 
-                {tareas.map((item) => (
-                  <>
-                    <AccionesTareas
-                      key={item.id}
-                      item={item}
-                      onDelete={handleDelete}
-                      onUpdate={handleUpdateTarea}
-                      setOpen={setOpen}
-                      open={open}
-                      value={title}
-                    ></AccionesTareas>
-                  </>
-                ))}
-       
+              </>
+            ))}
+
             {/* Consulta mas info */}
             <div className=" w-full py-6 sm:px-6 lg:px-8">
               <div className="px-4 py-6 sm:px-0">
@@ -261,37 +509,7 @@ export const ListaTareas = () => {
                   </div>
                 </div>
               </div>
-              {/* /End replace */}
             </div>
-            {/*Paginador*/}
-            {/* <div className="px-5 bg-white py-5 flex flex-col xs:flex-row items-center xs:justify-between">
-                        <div className="flex items-center">
-                            <button type="button" className="w-full p-4 border text-base rounded-l-xl text-gray-600 bg-white hover:bg-gray-100">
-                                <svg width="9" fill="currentColor" height="8" className="" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M1427 301l-531 531 531 531q19 19 19 45t-19 45l-166 166q-19 19-45 19t-45-19l-742-742q-19-19-19-45t19-45l742-742q19-19 45-19t45 19l166 166q19 19 19 45t-19 45z">
-                                    </path>
-                                </svg>
-                            </button>
-                            <button type="button" className="w-full px-4 py-2 border-t border-b text-base text-blue-800 bg-white hover:bg-gray-100 ">
-                                1
-                            </button>
-                            <button type="button" className="w-full px-4 py-2 border text-base text-gray-600 bg-white hover:bg-gray-100">
-                                2
-                            </button>
-                            <button type="button" className="w-full px-4 py-2 border-t border-b text-base text-gray-600 bg-white hover:bg-gray-100">
-                                3
-                            </button>
-                            <button type="button" className="w-full px-4 py-2 border text-base text-gray-600 bg-white hover:bg-gray-100">
-                                4
-                            </button>
-                            <button type="button" className="w-full p-4 border-t border-b border-r text-base  rounded-r-xl text-gray-600 bg-white hover:bg-gray-100">
-                                <svg width="9" fill="currentColor" height="8" className="" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M1363 877l-742 742q-19 19-45 19t-45-19l-166-166q-19-19-19-45t19-45l531-531-531-531q-19-19-19-45t19-45l166-166q19-19 45-19t45 19l742 742q19 19 19 45t-19 45z">
-                                    </path>
-                                </svg>
-                            </button>
-                        </div>
-                    </div> */}
           </div>
         </div>
       </div>
