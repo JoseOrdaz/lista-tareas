@@ -131,7 +131,7 @@ const decrement = () => {
                 <input
                   type="text"
                   readOnly
-                  className=" w-full flex-1 appearance-none rounded-lg border border-transparent border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className=" w-full flex-1 appearance-none rounded-lg  bg-white p-2 text-base text-gray-700 placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600"
                   placeholder="Select date"
                   value={format(selectedDate, "yyyy-MM-dd")}
                   onClick={toggleDatepicker}

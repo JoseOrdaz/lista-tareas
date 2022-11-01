@@ -29,7 +29,7 @@ const status = [
     id: 1,
     title: "Pendiente",
     name: (
-      <span className="relative inline-block rounded-full bg-red-300 p-1 font-semibold leading-tight  text-red-800">
+      <span class="relative inline-block rounded-full bg-red-300 p-[2px] font-semibold leading-tight  text-red-800">
         <span className="flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -241,80 +241,7 @@ export const ListaTareas = () => {
       return classes.filter(Boolean).join(" ");
     }
     return (
-      // <Listbox value={estado} key={status.id} onChange={setSelectStatus}>
-      //   {({ open }) => (
-      //     <>
-      //       <div className="relative">
-      //         <Listbox.Button
-      //           className="relative w-full cursor-pointer text-left focus:outline-none sm:text-sm"
-      //           placeholder="asignar tarea"
-      //         >
-      //           <span className="flex items-center">
-      //             <span className="relative inline-block font-semibold leading-tight">
-      //               <span className="rounded-ful absolute inset-0"></span>
-      //               {estado.name}
-                  
-      //             </span>
-      //             <span class="ml-3 block truncate text-black">{estado.title}</span>
-      //           </span>
-      //         </Listbox.Button>
-
-      //         <Transition
-      //           show={open}
-      //           as={Fragment}
-      //           leave="transition ease-in duration-100"
-      //           leaveFrom="opacity-100"
-      //           leaveTo="opacity-0"
-      //         >
-      //           <Listbox.Options className="absolute left-[-6px] z-10 mt-1 max-h-56 rounded-lg bg-white p-2 text-base shadow sm:text-sm">
-      //             {status.map((state) => (
-      //               <Listbox.Option
-      //                 key={state.id}
-      //                 className={({ active }) =>
-      //                   classNames(
-      //                     active ? "text-white" : "text-gray-900",
-      //                     "relative cursor-pointer select-none"
-      //                   )
-      //                 }
-      //                 value={state}
-      //               >
-      //                 {({ estado, active }) => (
-      //                   <>
-      //                     <div className="flex items-center">
-      //                       <span
-      //                         className={classNames(
-      //                           estado ? "font-semibold" : "font-normal",
-      //                           "block truncate"
-      //                         )}
-      //                       >
-      //                         {state.name}
-      //                       </span>
-      //                       <span class="ml-3 block truncate text-black">{state.title}</span>
-      //                     </div>
-
-      //                     {estado ? (
-      //                       <span
-      //                         className={classNames(
-      //                           active ? " text-gray-900" : "text-blue-600",
-      //                           "absolute inset-y-0 right-0 flex items-center pr-4"
-      //                         )}
-      //                       >
-      //                         {/* <CheckIcon
-      //                           className="h-5 w-5"
-      //                           aria-hidden="true"
-      //                         /> */}
-      //                       </span>
-      //                     ) : null}
-      //                   </>
-      //                 )}
-      //               </Listbox.Option>
-      //             ))}
-      //           </Listbox.Options>
-      //         </Transition>
-      //       </div>
-      //     </>
-      //   )}
-      // </Listbox>
+  
 
       <Listbox key={status.id} value={estado} onChange={setSelectStatus}>
       {({ open }) => (
@@ -420,7 +347,7 @@ export const ListaTareas = () => {
                 <input
                   type="text"
                   id='"form-subscribe-Filter'
-                  className=" w-full flex-1 appearance-none rounded-lg border border-transparent border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className=" w-full flex-1 appearance-none rounded-lg bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600"
                   placeholder="Escribe tu tarea..."
                   value={title}
                   onChange={handleChange}
