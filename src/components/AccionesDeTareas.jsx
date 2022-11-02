@@ -3,6 +3,7 @@ import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition, Listbox } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { SelectStatus } from "./SelectStatus";
+import { NoTareas } from "./NoTareas";
 
 export const AccionesTareas = ({ item, onDelete, onUpdate, status, estado, setSelectStatus}) => {
 
@@ -16,6 +17,8 @@ export const AccionesTareas = ({ item, onDelete, onUpdate, status, estado, setSe
     }
 
     return (
+      <>
+    
       <ul
         role="list"
         className="divide-y divide-gray-200 border-b hover:bg-gray-50"
@@ -88,6 +91,7 @@ export const AccionesTareas = ({ item, onDelete, onUpdate, status, estado, setSe
           </div>
         </li>
       </ul>
+</>
     );
   }
 

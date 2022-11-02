@@ -6,6 +6,7 @@ import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import DataPicker from "./DataPicker";
 import { format } from "date-fns";
 import { SelectStatus } from "./SelectStatus";
+import { NoTareas } from "./NoTareas";
 
 const people = [
   {
@@ -141,7 +142,6 @@ export const ListaTareas = () => {
     setOpen(false);
     console.log(item.state);
   }
-
   function AssignedTo() {
     function classNames(...classes) {
       return classes.filter(Boolean).join(" ");
@@ -240,7 +240,7 @@ export const ListaTareas = () => {
       </Listbox>
     );
   }
-
+console.log(tareas)
   return (
     <div className="container mx-auto max-w-5xl px-4 sm:px-8">
       <div className="py-8">
@@ -297,7 +297,9 @@ export const ListaTareas = () => {
         </div>
         <div className=" m-auto flex max-w-3xl items-center p-2">
           <div className="inline-block min-w-full overflow-hidden rounded-lg bg-white shadow">
-            {tareas.map((item) => (
+
+          
+          {tareas[0] ? tareas.map((item) => (
               <>
                 <AccionesTareas
                   item={item}
@@ -308,43 +310,12 @@ export const ListaTareas = () => {
                   setSelectStatus={setSelectStatus}
                   status={status}
                 ></AccionesTareas>
+
               </>
-            ))}
+            )): <NoTareas></NoTareas>} 
 
             {/* Consulta mas info */}
-            <div className="bg-gray-50">
-              <div className="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:flex lg:items-center lg:justify-between lg:py-16 lg:px-8">
-                <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                  <span className="block">
-                    ¿Preparad@ para organizar tus tareas?
-                  </span>
-                  <span className="block text-blue-600">
-                    ¡Empieza ya y organizate!
-                  </span>
-                  <p className="mt-3 text-base text-gray-500 sm:mx-auto sm:mt-5 sm:max-w-xl sm:text-lg md:mt-5 md:text-xl lg:mx-0">
-                    Desarrollado con Vite y TailWind CSS
-                  </p>
-                </h2>
-                <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0">
-                  <div className="inline-flex rounded-md shadow">
-                    <a
-                      href="https://tailwindui.com/"
-                      className="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-5 py-3 text-base font-medium text-white hover:bg-blue-700"
-                    >
-                      Tailwind CSS
-                    </a>
-                  </div>
-                  <div className="ml-3 inline-flex rounded-md shadow">
-                    <a
-                      href="https://vitejs.dev/"
-                      className="inline-flex items-center justify-center rounded-md border border-transparent bg-white px-5 py-3 text-base font-medium text-blue-600 hover:bg-blue-50"
-                    >
-                      Vite
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+       
           </div>
         </div>
       </div>
