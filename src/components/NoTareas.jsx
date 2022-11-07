@@ -11,7 +11,7 @@ export const NoTareas = () => {
       <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0">
         <div className="inline-flex w-auto rounded-md shadow">
 
-        <img className="max-w-[295px]" src='./notareas.png'></img>
+        <img className="max-w-[295px] w-full" src='./notareas.png'></img>
         </div>
     
       </div>
